@@ -1,0 +1,10 @@
+#define BACKLOG 10
+#define MESSAGE_SIZE 1000
+#define HOST_NAME_LENGTH 10
+#define SERVERPORT_DEFAULT "12001"
+#define MESSAGE_SIZE_RECV 500
+
+void open_sock(char**, int*, struct addrinfo**);
+void server_listen(int, char*);
+int accept_connection(int, int*, struct addrinfo*, char*);
+void receive_message(int, char**);

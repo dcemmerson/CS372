@@ -1,0 +1,11 @@
+'''
+
+sources: https://docs.python.org/2/howto/sockets.html
+'''
+
+import socket
+
+def open_socket():
+    socket.socket(
+        
+    

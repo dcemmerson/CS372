@@ -56,16 +56,22 @@ int main(int argc, char** argv){
   int num_toks = 0;
   struct addrinfo* serverinfo;
   
-  open_sock(argv, NULL, &sockfd, &serverinfo);
+  open_sock(argv, NULL, &serverinfo);
+  bind_sock(&sockfd, &serverinfo);
   server_listen(sockfd, argv[1]);
   
   while(1){
+    printf("ready to accept\n");
     if(accept_connection(sockfd, &newfd, serverinfo, ip4) == -1) continue;
-    
-    receive_message(newfd, &buffer_receive);
-    parse_recvd(buffer_receive, &parsed_buffer, &num_toks);
-    empty_buffer(&parsed_buffer, &num_toks);
-    send_user_request(newfd, parsed_buffer, argv, ip4);
+
+    while(1){
+      receive_message(newfd, &buffer_receive);
+      parse_recvd(buffer_receive, &parsed_buffer, &num_toks);
+      send_user_request(newfd, parsed_buffer, argv, ip4);
+
+
+      empty_buffer(&parsed_buffer, &num_toks);
+    }
   }
 
   free(buffer_receive);

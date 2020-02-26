@@ -26,10 +26,9 @@ Some "pseudo pseudocode"
 
 from client_sockets import *
 import sys
-#import threading
-
-END = "\n.\n"
-MESSAGE_SIZE_RECV = 500
+from stoppable_thread import StoppableListenThread
+import signal
+import threading
 
 def extract_arguments(argv):
     if len(argv) == 3:
@@ -39,34 +38,36 @@ def extract_arguments(argv):
     else:
         return "flip1.engr.oregonstate.edu", 12000
 
-'''
-name: send_message
-preconditions: conn is open socket connection to other host
-               handle is this hosts user handle string
-               msg contains message string we want to send to other host
-               terminate set to true is message is '\quit'
-postconditions: msg sent to other host
-description: does the bulk of the work of sending an actual message to other
-             host on conn socket. Loops until entire message is sent
-'''
-def send_message(conn, msg, terminate=False):
-    received_bytes = sent_bytes = 0
-    msg += END
-
-    #first send msg, then wait to recv response from server
-    while(sent_bytes < len(msg)): 
-        sent_bytes += conn.send(msg)
-
     
 
 def main():
+#    lock = threading.RLock()
     host, port = extract_arguments(sys.argv)
+    sock_ctrl = open_socket(port, host, False)
     sock_ft = open_socket(port + 1)
-    sock_ctrl = open_socket(port, host)
+    listen_thread = StoppableListenThread(receive_file, 
+                                          "listen_thread", 
+                                          (sock_ft, port + 1), {})
+    listen_thread.assign_sock(sock_ft)
+    listen_thread.start()
 
     while(1):
+
         userinput = raw_input(">")
         send_message(sock_ctrl, userinput)
+
+        response = recv_message(sock_ctrl)
+
+        if response == "ACK_pwd":
+ 
+#            receive_file(sock_ft, port + 1)
+        elif response == "ACK_file":
+            receive_file(sock_ft, port + 1)
+        else:
+            print(response)
+
+
+
 
 if __name__ == "__main__":
     main()

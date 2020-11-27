@@ -1,7 +1,7 @@
 # Client-Server, Terminal to Terminal Chat
 ## About
 This is an implementation of a multithreaded, client-server chat program.The client program is written in C while the server program is
-written in python. Messages can be exchanged between the two simply
+written in python. Both user interfaces are built with the curses library. Messages can be exchanged between the two simply
 by typing into the command line in any order! The chat server is multithreaded and messages can be sent in any order. 
 
 ---

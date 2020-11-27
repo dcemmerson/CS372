@@ -15,7 +15,7 @@ To run the server, simply use "python chatserv.py [port]" where both port is opt
 For example:<br>
 ```
 python chatserv.py			#will attempt to listen on flip1.engr.oregonstate.edu::12000
-python chatserv.py 12001	#will attempt to listen on flip1.engr.oregonstate.edu::12001
+python chatserv.py 12001			#will attempt to listen on flip1.engr.oregonstate.edu::12001
 ```
 ### Client
 To compile the chatclient program, using the provided makefile you may simply type
@@ -23,9 +23,9 @@ To compile the chatclient program, using the provided makefile you may simply ty
 "chatclient" that can then be run by enter "./chatclient [host] [port]" into command line if cwd contains file.<br><br>
 For example:<br>
 ```
-chatclient											// Attempt to connect to flip1.engr.oregonstate.edu::12000
-chatclient 12001     								// Attempt to connect to flip1.engr.oregonstate.edu::12001
-chatclient flip2.engr.oregonstate.edu 12002	     	// Attempt to connect to flip2.engr.oregonstate.edu::12002
+chatclient			// Attempt to connect to flip1.engr.oregonstate.edu::12000
+chatclient 12001		// Attempt to connect to flip1.engr.oregonstate.edu::12001
+chatclient flip2.engr.oregonstate.edu 12002			// Attempt to connect to flip2.engr.oregonstate.edu::12002
 ```
 Typing "\quit" into either server or client while connected will terminate connection. The client
 program will exit but the server program will continue listening on the same port for

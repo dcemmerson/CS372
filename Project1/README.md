@@ -15,7 +15,7 @@ To run the server, simply use "python chatserv.py [port]" where both port is opt
 For example:<br>
 ```
 python chatserv.py			#will attempt to listen on flip1.engr.oregonstate.edu::12000
-python chatserv.py 12001			#will attempt to listen on flip1.engr.oregonstate.edu::12001
+python chatserv.py 12001		#will attempt to listen on flip1.engr.oregonstate.edu::12001
 ```
 ### Client
 To compile the chatclient program, using the provided makefile you may simply type
